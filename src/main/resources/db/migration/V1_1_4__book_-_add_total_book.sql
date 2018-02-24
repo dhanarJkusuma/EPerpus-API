@@ -1,0 +1,2 @@
+ALTER TABLE book
+ADD COLUMN total_stock INT NOT NULL DEFAULT 0;

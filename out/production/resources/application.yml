@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/vein_library
+    username: veintech
+    password: veintech
+    driverClassName: org.postgresql.Driver
+
+auth:
+  hash:
+    seed: 48DkxzVnME4RSJXqcmOzGfNdXZZiYlTXLPVdV

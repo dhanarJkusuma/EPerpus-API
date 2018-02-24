@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/library
+    username: veintech
+    password: veintech
+    driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: true
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+auth:
+  hash:
+    seed: 48DkxzVnME4RSJXqcmOzGfNdXZZiYlTXLPVdV
+  token:
+    expiredInDays: 14
+
+logging:
+  level:
+     org:
+       springframework:
+         security: DEBUG
+
+
+
