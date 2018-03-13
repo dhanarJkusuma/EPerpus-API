@@ -68,6 +68,16 @@ public class DbTransactionService implements TransactionService{
         }
         Date returnDate = Date.from(returnZonedDate.toInstant());
         transaction.setReturnDate(returnDate);
+        return orderTransactionRepository.save(transaction);
+    }
+
+    @Override
+    public OrderTransaction approveTransaction(String transactionId) throws TransactionNotFoundException {
+        OrderTransaction transaction = orderTransactionRepository.findByPublicId(transactionId);
+        if(transaction == null){
+            throw new TransactionNotFoundException(transactionId);
+        }
+        transaction.setIsApproved(true);
         transaction.getItems().forEach(item -> {
             bookService.updateStockBooks(item.getBook(), item.getBook().getStock() + item.getQuantity());
         });

@@ -46,6 +46,21 @@ public class DbAuthService implements AuthService{
     }
 
     @Override
+    public Session validateAdminLogin(String username, String password) {
+        AuthenticationUser user = userRepository.findOneByUsername(username);
+        if(user == null || !user.getStatus().equals(AuthenticationUser.Status.ADMIN)){
+            throw new BadCredentialsException("Invalid username password");
+        }
+        boolean isValid =  encoder.matches(password, user.getPassword());
+        if(!isValid){
+            throw new BadCredentialsException("Invalid username password");
+        }
+
+        String token = tokenService.generateNewTokenSession(user);
+        return new Session(token);
+    }
+
+    @Override
     public Session registerNewMember(AuthenticationUser authenticationUser) {
         String passwordHashed = encoder.encode(authenticationUser.getPassword());
         authenticationUser.setPassword(passwordHashed);

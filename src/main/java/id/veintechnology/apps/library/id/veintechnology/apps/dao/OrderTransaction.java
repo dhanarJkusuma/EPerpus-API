@@ -35,6 +35,9 @@ public class OrderTransaction {
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
     private List<OrderTransactionItem> items;
 
+    @Column(name = "is_approved")
+    private Boolean isApproved;
+
     public OrderTransaction() {
         this.createdOn = new Date();
     }
@@ -46,6 +49,7 @@ public class OrderTransaction {
         setCreatedOn(builder.createdOn);
         setMember(builder.member);
         setItems(builder.items);
+        setIsApproved(builder.isApproved);
         this.createdOn = new Date();
     }
 
@@ -105,6 +109,14 @@ public class OrderTransaction {
         this.items = items;
     }
 
+    public Boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(Boolean approved) {
+        isApproved = approved;
+    }
+
     public static class Builder{
         String publicId;
         Date borrowDate;
@@ -112,6 +124,11 @@ public class OrderTransaction {
         Date createdOn;
         Member member;
         List<OrderTransactionItem> items;
+        Boolean isApproved;
+
+        private Builder(){
+            this.isApproved = false;
+        }
 
         public static Builder newBuilder(){
             return new Builder();
@@ -144,6 +161,11 @@ public class OrderTransaction {
 
         public Builder items(List<OrderTransactionItem> val){
             this.items = val;
+            return this;
+        }
+
+        public Builder isApproved(Boolean val){
+            this.isApproved = val;
             return this;
         }
 

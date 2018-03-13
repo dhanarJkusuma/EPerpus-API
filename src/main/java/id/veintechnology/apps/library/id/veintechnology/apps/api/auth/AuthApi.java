@@ -58,5 +58,16 @@ public class AuthApi {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Admin Login
+     * @param payload
+     * @return
+     */
+
+    @PostMapping(path = "/admin/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public SessionDto adminLogin(@RequestBody @Validated LoginPayload payload){
+        Session session = authService.validateAdminLogin(payload.getUsername(), payload.getPassword());
+        return new SessionDto(session.getToken());
+    }
 
 }

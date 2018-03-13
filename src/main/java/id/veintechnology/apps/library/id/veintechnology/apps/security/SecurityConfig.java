@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers(HttpMethod.DELETE,"/api/v1/category/**").hasRole(ADMIN_ROLE)
                     .antMatchers("/v1/ping").permitAll()
+                    .antMatchers("/api/v1/auth/admin/login").permitAll()
                     .antMatchers("/api/v1/auth/login").permitAll()
                     .antMatchers("/api/v1/auth/register").permitAll()
                     .anyRequest().authenticated();

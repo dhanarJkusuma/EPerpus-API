@@ -61,6 +61,7 @@ public class TransactionMapper {
         OrderTransaction transaction =  OrderTransaction.Builder.newBuilder()
                 .borrowDate(borrowDate)
                 .member(member)
+                .isApproved(false)
                 .build();
         Map<String, Integer> stocks = new HashMap<>();
         payload.getBookCodes().stream().forEach(s -> {

@@ -125,6 +125,25 @@ public class TransactionApi {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping(path = "/{transactionId}/approved")
+    public ResponseEntity approveTransactionReturn(
+            @PathVariable("transactionId") String transactionId
+    ){
+        OrderTransaction transaction;
+        try{
+            transaction = trxService.approveTransaction(transactionId);
+        }catch (TransactionNotFoundException e){
+            logger.error(e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", true);
+        response.put("message", "Berhasil menyetujui pengembalian transaksi. ");
+        response.put("data", TransactionMapper.toTransactionDto(transaction));
+        return ResponseEntity.ok(response);
+    }
+
+
     @GetMapping(path = "/{transactionId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findTransaction(
             @PathVariable("transactionId") String transactionId

@@ -14,6 +14,7 @@ import java.util.List;
 public interface TransactionService {
     OrderTransaction createTransaction(OrderTransaction transaction, List<Book> books) throws DuplicateTransactionCodeException, BookNotAvailableException;
     OrderTransaction completeTransaction(String transactionId, ZonedDateTime returnZonedDate) throws TransactionNotFoundException;
+    OrderTransaction approveTransaction(String transactionId) throws TransactionNotFoundException;
     OrderTransaction findTransaction(String publicId) throws TransactionNotFoundException;
     OrderTransaction destroyTransaction(String publicId) throws TransactionNotFoundException;
     Page<OrderTransaction> retrieveTransaction(int page, int size);
