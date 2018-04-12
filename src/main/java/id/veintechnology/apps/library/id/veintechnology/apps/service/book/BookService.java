@@ -13,6 +13,10 @@ public interface BookService {
 
     Book findByCode(String code);
 
+    Book findById(Long bookId);
+
+    List<Book> findByCodes(List<String> codes);
+
     Page<Book> retrieveBook(int size, int page);
 
     Book updateBook(Book book);
@@ -20,6 +24,10 @@ public interface BookService {
     Book borrowBook(Book book);
 
     void updateStockBooks(Book book, int quantity);
+
+    void addStockByBookId(Long bookId, int quantity);
+
+    void subtractStockByBookId(Long bookId, int quantity);
 
     Book destroyBook(Book book);
 

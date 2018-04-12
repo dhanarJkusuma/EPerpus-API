@@ -17,10 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -58,6 +55,11 @@ public class AuthApi {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping(path = "/check-token", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity checkToken(){
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * Admin Login
      * @param payload
@@ -68,6 +70,14 @@ public class AuthApi {
     public SessionDto adminLogin(@RequestBody @Validated LoginPayload payload){
         Session session = authService.validateAdminLogin(payload.getUsername(), payload.getPassword());
         return new SessionDto(session.getToken());
+    }
+
+    @GetMapping(path = "/admin/check-token", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity checkTokenAdmin(@AuthenticationPrincipal User user){
+        if(!user.getStatus().equals(AuthenticationUser.Status.ADMIN)){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -16,7 +16,7 @@ public class BookMapper {
                 .author(payload.getAuthor())
                 .code(payload.getCode())
                 .year(payload.getYear())
-                .stock(payload.getStock())
+                .stock(payload.getTotalStock())
                 .totalStock(payload.getTotalStock())
                 .editor(payload.getEditor())
                 .publisher(payload.getPublisher())

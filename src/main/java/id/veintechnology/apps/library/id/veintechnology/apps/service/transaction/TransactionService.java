@@ -19,4 +19,6 @@ public interface TransactionService {
     OrderTransaction destroyTransaction(String publicId) throws TransactionNotFoundException;
     Page<OrderTransaction> retrieveTransaction(int page, int size);
     Page<OrderTransaction> retrieveInCompleteTransactionByMember(String member);
+    Page<OrderTransaction> retrieveTransactionPending();
+    Page<OrderTransaction> retrieveTransactionBetween(ZonedDateTime from, ZonedDateTime to);
 }

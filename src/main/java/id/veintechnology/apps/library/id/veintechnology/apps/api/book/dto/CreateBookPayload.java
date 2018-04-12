@@ -1,6 +1,7 @@
 package id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto;
 
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -24,13 +25,10 @@ public class CreateBookPayload {
 
     private int totalStock;
 
-    private int stock;
-
     private List<String> categoryCode;
 
     public CreateBookPayload() {
         this.totalStock = 1;
-        this.stock = 1;
     }
 
     public String getCode() {
@@ -79,14 +77,6 @@ public class CreateBookPayload {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     }
 
     public int getTotalStock() {

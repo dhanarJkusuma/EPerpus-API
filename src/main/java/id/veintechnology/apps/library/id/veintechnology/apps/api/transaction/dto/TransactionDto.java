@@ -12,6 +12,7 @@ public class TransactionDto {
     private ZonedDateTime createdOn;
     private TransactionMemberDto member;
     private List<TransactionBookDto> books;
+    private boolean isApproved;
 
     public TransactionDto() {
     }
@@ -23,6 +24,7 @@ public class TransactionDto {
         setCreatedOn(builder.createdOn);
         setMember(builder.member);
         setBooks(builder.books);
+        setIsApproved(builder.isApproved);
     }
 
     public String getPublicId() {
@@ -73,6 +75,14 @@ public class TransactionDto {
         this.books = books;
     }
 
+    public boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(boolean approved) {
+        isApproved = approved;
+    }
+
     public static class Builder {
 
         String publicId;
@@ -81,6 +91,7 @@ public class TransactionDto {
         ZonedDateTime createdOn;
         TransactionMemberDto member;
         List<TransactionBookDto> books;
+        boolean isApproved;
 
         public static Builder newBuilder(){
             return new Builder();
@@ -113,6 +124,11 @@ public class TransactionDto {
 
         public Builder books(List<TransactionBookDto> val){
             books = val;
+            return this;
+        }
+
+        public Builder isApproved(boolean val){
+            this.isApproved = val;
             return this;
         }
 

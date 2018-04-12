@@ -1,10 +1,7 @@
 package id.veintechnology.apps.library.id.veintechnology.apps.api.transaction;
 
 import id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.dto.*;
-import id.veintechnology.apps.library.id.veintechnology.apps.dao.Book;
-import id.veintechnology.apps.library.id.veintechnology.apps.dao.Member;
-import id.veintechnology.apps.library.id.veintechnology.apps.dao.OrderTransaction;
-import id.veintechnology.apps.library.id.veintechnology.apps.dao.OrderTransactionItem;
+import id.veintechnology.apps.library.id.veintechnology.apps.dao.*;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -13,15 +10,16 @@ import java.util.stream.Collectors;
 
 public class TransactionMapper {
 
-    public static TransactionBookDto toTransactionBookDto(Book book, int quantity){
+    public static TransactionBookDto toTransactionBookDto(OrderTransactionItem item){
         return TransactionBookDto.Builder.newBuilder()
-                .code(book.getCode())
-                .title(book.getTitle())
-                .author(book.getAuthor())
-                .editor(book.getEditor())
-                .publisher(book.getPublisher())
-                .year(book.getYear())
-                .quantity(quantity)
+                .code(item.getBookCode())
+                .title(item.getBookTitle())
+                .author(item.getBookAuthor())
+                .editor(item.getBookEditor())
+                .publisher(item.getBookPublisher())
+                .year(item.getBookYear())
+                .quantity(item.getQuantity())
+                .categories(item.getBookCategories())
                 .build();
     }
 
@@ -39,7 +37,7 @@ public class TransactionMapper {
 
     public static TransactionDto toTransactionDto(OrderTransaction transaction){
         List<TransactionBookDto> bookDtos = new ArrayList<>();
-        transaction.getItems().forEach(item -> bookDtos.add(toTransactionBookDto(item.getBook(), item.getQuantity())));
+        transaction.getItems().forEach(item -> bookDtos.add(toTransactionBookDto(item)));
         TransactionDto.Builder builder = TransactionDto.Builder.newBuilder();
         if(transaction.getReturnDate() != null){
             builder.returnDate(parseDate(transaction.getReturnDate()));
@@ -49,6 +47,7 @@ public class TransactionMapper {
                 .member(toTransactionMemberDto(transaction.getMember()))
                 .publicId(transaction.getPublicId())
                 .books(bookDtos)
+                .isApproved(transaction.getIsApproved())
                 .build();
     }
 
@@ -73,7 +72,20 @@ public class TransactionMapper {
     }
 
     private static OrderTransactionItem newTransactionFromBook(Book book, int quantity, OrderTransaction transaction){
-        return OrderTransactionItem.Builder.newBuilder().book(book).transaction(transaction).quantity(quantity).build();
+        List<String> categories = book.getCategories().stream().map(Category::getName).collect(Collectors.toList());
+        return OrderTransactionItem.Builder
+                .newBuilder()
+                .bookId(book.getId())
+                .bookCode(book.getCode())
+                .bookTitle(book.getTitle())
+                .bookAuthor(book.getAuthor())
+                .bookEditor(book.getEditor())
+                .bookPublisher(book.getPublisher())
+                .bookYear(book.getYear())
+                .bookCategories(String.join(",", categories))
+                .quantity(quantity)
+                .transaction(transaction)
+                .build();
     }
 
 }

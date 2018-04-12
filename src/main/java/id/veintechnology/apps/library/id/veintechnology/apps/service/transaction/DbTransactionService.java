@@ -48,14 +48,15 @@ public class DbTransactionService implements TransactionService{
         }
 
         transaction.getItems().forEach(i -> {
-            if(i.getBook().getStock() < i.getQuantity()){
-                throw new BookNotAvailableException(i.getBook().getCode());
+            Book book = bookService.findById(i.getBookId());
+            if(book.getStock() < i.getQuantity()){
+                throw new BookNotAvailableException(book.getCode());
             }
         });
 
         OrderTransaction saved = orderTransactionRepository.save(transaction);
         if(saved != null){
-           saved.getItems().forEach(i -> bookService.updateStockBooks(i.getBook(), i.getBook().getStock() - i.getQuantity()));
+           saved.getItems().forEach(i -> bookService.subtractStockByBookId(i.getBookId(), i.getQuantity()));
         }
         return saved;
     }
@@ -78,8 +79,9 @@ public class DbTransactionService implements TransactionService{
             throw new TransactionNotFoundException(transactionId);
         }
         transaction.setIsApproved(true);
+
         transaction.getItems().forEach(item -> {
-            bookService.updateStockBooks(item.getBook(), item.getBook().getStock() + item.getQuantity());
+            bookService.addStockByBookId(item.getBookId(), item.getQuantity());
         });
         return orderTransactionRepository.save(transaction);
     }
@@ -115,6 +117,22 @@ public class DbTransactionService implements TransactionService{
         Sort sort = new Sort(Sort.Direction.DESC, "createdOn");
         Pageable pageable = new PageRequest(0, 255, sort);
         return orderTransactionRepository.findInCompleteTransactionByMemberId(member, pageable);
+    }
+
+    @Override
+    public Page<OrderTransaction> retrieveTransactionPending() {
+        Sort sort = new Sort(Sort.Direction.DESC, "createdOn");
+        Pageable pageable = new PageRequest(0, 255, sort);
+        return orderTransactionRepository.findAllInCompleteTransactionBy(pageable);
+    }
+
+    @Override
+    public Page<OrderTransaction> retrieveTransactionBetween(ZonedDateTime from, ZonedDateTime to) {
+        Sort sort = new Sort(Sort.Direction.DESC, "createdOn");
+        Pageable pageable = new PageRequest(0, 1000, sort);
+        Date start = Date.from(from.toInstant());
+        Date end = Date.from(to.toInstant());
+        return orderTransactionRepository.findCompleteHistoryTransaction(start, end, pageable);
     }
 
 

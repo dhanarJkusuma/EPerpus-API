@@ -8,8 +8,9 @@ public class TransactionBookDto{
     private String author;
     private String editor;
     private String publisher;
-    private int year;
-    private int quantity;
+    private String categories;
+    private Integer year;
+    private Integer quantity;
 
     public TransactionBookDto() {
     }
@@ -22,6 +23,7 @@ public class TransactionBookDto{
         setPublisher(builder.publisher);
         setYear(builder.year);
         setQuantity(builder.quantity);
+        setCategories(builder.categories);
     }
 
     public String getCode() {
@@ -64,20 +66,28 @@ public class TransactionBookDto{
         this.publisher = publisher;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 
     public static class Builder{
@@ -87,8 +97,10 @@ public class TransactionBookDto{
         String author;
         String editor;
         String publisher;
-        int year;
-        int quantity;
+        String categories;
+        Integer year;
+        Integer quantity;
+
 
         public static Builder newBuilder(){
             return new Builder();
@@ -119,13 +131,18 @@ public class TransactionBookDto{
             return this;
         }
 
-        public Builder year(int val){
+        public Builder year(Integer val){
             this.year = val;
             return this;
         }
 
-        public Builder quantity(int val){
+        public Builder quantity(Integer val){
             this.quantity = val;
+            return this;
+        }
+
+        public Builder categories(String val){
+            this.categories = val;
             return this;
         }
 

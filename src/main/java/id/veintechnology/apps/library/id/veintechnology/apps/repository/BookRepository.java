@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,10 @@ import java.util.Set;
 public interface BookRepository extends JpaRepository<Book, Long>{
 
     Book findFirstByCode(String code);
+
+    Book findById(Long bookId);
+
+    List<Book> findByCodeIn(Collection<String> codes);
 
     @Override
     Page<Book> findAll(Pageable pageable);
@@ -25,7 +30,6 @@ public interface BookRepository extends JpaRepository<Book, Long>{
             "join b.categories c " +
             "where c.code = :categoryId")
     Page<Book> findByTitle(@Param("categoryId") String categoryId, Pageable pageable);
-    // @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE CONCAT('%',:title,'%')")
 
     @Query("SELECT b from Book b WHERE b.code in :codes")
     Set<Book> findByCodes(@Param("codes") List<String> codes);
@@ -34,4 +38,12 @@ public interface BookRepository extends JpaRepository<Book, Long>{
     @Modifying
     @Query("UPDATE Book b SET b.stock = :quantity WHERE b.id = :bookId")
     void updateStock(@Param("bookId") long bookId, @Param("quantity") int quantity);
+
+    @Modifying
+    @Query("UPDATE Book b SET b.stock = b.stock + :quantity WHERE b.id = :bookId")
+    void addStock(@Param("bookId") long bookId, @Param("quantity") int quantity);
+
+    @Modifying
+    @Query("UPDATE Book b SET b.stock = b.stock - :quantity WHERE b.id = :bookId")
+    void subtractStock(@Param("bookId") long bookId, @Param("quantity") int quantity);
 }

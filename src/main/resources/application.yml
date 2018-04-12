@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/library
+    url: jdbc:postgresql://localhost/elibs
     username: veintech
     password: veintech
     driverClassName: org.postgresql.Driver

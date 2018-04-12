@@ -48,6 +48,16 @@ public class DbBookService implements BookService{
     }
 
     @Override
+    public Book findById(Long bookId) {
+        return bookRepository.findById(bookId);
+    }
+
+    @Override
+    public List<Book> findByCodes(List<String> codes) {
+        return bookRepository.findByCodeIn(codes);
+    }
+
+    @Override
     public Page<Book> retrieveBook(int size, int page) {
         Sort sort = new Sort(Sort.Direction.ASC, "title");
         Pageable pageRequest = new PageRequest(page, size, sort);
@@ -68,6 +78,16 @@ public class DbBookService implements BookService{
     @Override
     public void updateStockBooks(Book book, int quantity) {
         bookRepository.updateStock(book.getId(), quantity);
+    }
+
+    @Override
+    public void addStockByBookId(Long bookId, int quantity) {
+        bookRepository.addStock(bookId, quantity);
+    }
+
+    @Override
+    public void subtractStockByBookId(Long bookId, int quantity) {
+        bookRepository.subtractStock(bookId, quantity);
     }
 
     @Override
