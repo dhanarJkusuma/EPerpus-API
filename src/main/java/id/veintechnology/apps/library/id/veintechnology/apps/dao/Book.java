@@ -49,7 +49,6 @@ public class Book {
     )
     private Set<Category> categories = new HashSet<>();
 
-
     public Book() {
         this.totalStock = 1;
         this.stock = 1;

@@ -1,0 +1,2 @@
+ALTER TABLE order_transaction
+ADD COLUMN is_approved BOOLEAN NOT NULL DEFAULT FALSE;

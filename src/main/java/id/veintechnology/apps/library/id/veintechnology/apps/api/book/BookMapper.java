@@ -5,12 +5,30 @@ import id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.Catego
 import id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.CreateBookPayload;
 import id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.UpdateBookPayload;
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Book;
+import id.veintechnology.apps.library.id.veintechnology.apps.dao.Category;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class BookMapper {
     public static Book toBookDao(CreateBookPayload payload){
+        return Book.Builder.newBuilder()
+                .title(payload.getTitle())
+                .author(payload.getAuthor())
+                .code(payload.getCode())
+                .year(payload.getYear())
+                .stock(payload.getTotalStock())
+                .totalStock(payload.getTotalStock())
+                .editor(payload.getEditor())
+                .publisher(payload.getPublisher())
+                .build();
+    }
+
+    public static Book toBookDaoCreate(CreateBookPayload payload){
+        // populate categoryCode to category
+        List<Category> categories = payload.getCategoryCode().stream().map(Category::createByCode).collect(Collectors.toList());
         return Book.Builder.newBuilder()
                 .title(payload.getTitle())
                 .author(payload.getAuthor())

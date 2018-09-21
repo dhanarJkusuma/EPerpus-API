@@ -34,6 +34,12 @@ public class Category {
         this.createdOn = new Date();
     }
 
+    public static Category createByCode(String code){
+        Category c = new Category();
+        c.setCode(code);
+        return c;
+    }
+
     public long getId() {
         return id;
     }

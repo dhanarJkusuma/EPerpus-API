@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -47,7 +48,7 @@ public class DbCategoryService implements CategoryService {
     }
 
     @Override
-    public Set<Category> findByCategoryCodes(List<String> codes) {
+    public Set<Category> findByCategoryCodes(Collection<String> codes) {
         return categoryRepository.findByCodes(codes);
     }
 

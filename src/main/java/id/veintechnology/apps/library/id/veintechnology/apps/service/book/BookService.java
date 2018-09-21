@@ -5,11 +5,14 @@ import id.veintechnology.apps.library.id.veintechnology.apps.service.book.except
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface BookService {
 
-    Book createNewBook(Book book);
+    Book createNewBook(Book book, Set<String> categories);
+
+    Book removeAllCategories(Book book);
 
     Book findByCode(String code);
 
@@ -19,7 +22,7 @@ public interface BookService {
 
     Page<Book> retrieveBook(int size, int page);
 
-    Book updateBook(Book book);
+    Book updateBook(Book book, Set<String> categories);
 
     Book borrowBook(Book book);
 

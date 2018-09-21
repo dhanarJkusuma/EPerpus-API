@@ -11,39 +11,39 @@ import javax.validation.constraints.Size;
 
 public class RegisterPayload {
 
-    @NotNull
+    @NotNull(message = "Username cannot be null.")
     @Size(min = 6, max = 20)
     private String username;
 
-    @NotNull
+    @NotNull(message = "Password cannot be null.")
     @Size(min = 6, max = 20)
     private String password;
 
-    @NotNull
+    @NotNull(message = "Name cannot be null.")
     @Size(min = 6, max = 50)
     private String name;
 
-    @NotNull
+    @NotNull(message = "Gender cannot be null.")
     private Gender gender;
 
-    @NotNull
+    @NotNull(message = "Phone Number cannot be null.")
     @Size(min = 10, max = 15)
     private String phone;
 
-    @NotNull
+    @NotNull(message = "Address cannot be null.")
     private String address;
 
-    @NotNull
+    @NotNull(message = "Email cannot be null.")
     @Email
     private String email;
 
-    @NotNull
+    @NotNull(message = "Company cannot be null.")
     private String company;
 
-    @NotNull
+    @NotNull(message = "EmployeeNo cannot be null.")
     private String employeeNo;
 
-    @NotNull
+    @NotNull(message = "workUnit cannot be null.")
     private String workUnit;
 
     public RegisterPayload() {

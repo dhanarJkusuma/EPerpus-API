@@ -1,16 +1,19 @@
 package id.veintechnology.apps.library.id.veintechnology.apps.service.book;
 
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Book;
+import id.veintechnology.apps.library.id.veintechnology.apps.dao.Category;
 import id.veintechnology.apps.library.id.veintechnology.apps.repository.BookRepository;
-import id.veintechnology.apps.library.id.veintechnology.apps.repository.CategoryRepository;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.DuplicateBookCodeException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.BookNotFoundException;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,28 +21,38 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.springframework.util.StringUtils.isEmpty;
-
 
 @Service
 public class DbBookService implements BookService{
 
     private final BookRepository bookRepository;
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     @Autowired
-    public DbBookService(BookRepository bookRepository, CategoryRepository categoryRepository) {
+    public DbBookService(BookRepository bookRepository, CategoryService categoryService) {
         this.bookRepository = bookRepository;
-        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
     }
 
     @Override
-    public Book createNewBook(Book book) {
+    public Book createNewBook(Book book, Set<String> categoryCodes) throws RuntimeException {
+        if(categoryCodes.size() > 0){
+            Set<Category> categories = categoryService.findByCategoryCodes(categoryCodes);
+            if(categories.size() != categoryCodes.size()){
+                throw new DataIntegrityViolationException("Failed to insert new book, some category doesn't exist.");
+            }
+        }
         Book existBook = bookRepository.findFirstByCode(book.getCode());
         if(existBook != null){
             throw new DuplicateBookCodeException(existBook.getCode());
         }
         return bookRepository.save(book);
+    }
+
+    @Override
+    public Book removeAllCategories(Book book) {
+        book.getCategories().removeAll(book.getCategories());
+        return bookRepository.saveAndFlush(book);
     }
 
     @Override
@@ -65,7 +78,23 @@ public class DbBookService implements BookService{
     }
 
     @Override
-    public Book updateBook(Book book) {
+    public Book updateBook(Book book, Set<String> categoryCodes) {
+        Set<Category> categories = new HashSet<>();
+        // check existence of categories by categoryCodes
+        if(categoryCodes.size() > 0){
+            categories = categoryService.findByCategoryCodes(categoryCodes);
+            if(categories.size() != categoryCodes.size()){
+                throw new DataIntegrityViolationException("Failed to insert new book, some category doesn't exist.");
+            }
+        }
+
+        // delete old relation by categories
+        book = removeAllCategories(book);
+
+        // attach new many2many relation
+        if(categories.size() > 0){
+            book.setCategories(categories);
+        }
         return bookRepository.save(book);
     }
 
@@ -99,7 +128,7 @@ public class DbBookService implements BookService{
     @Override
     public Page<Book> searchBook(String query, int size, int page) {
         Pageable pageRequest = new PageRequest(page, size);
-        return bookRepository.findByTitle(query, pageRequest);
+        return bookRepository.searchBookByTitle(query, pageRequest);
     }
 
     @Override
@@ -118,6 +147,6 @@ public class DbBookService implements BookService{
     @Override
     public Page<Book> fetchBookByCategory(String categoryCode, int size, int page) {
         Pageable pageable = new PageRequest(page, size);
-        return categoryRepository.findBooksByCategory(categoryCode, pageable);
+        return bookRepository.findByCategoryCode(categoryCode, pageable);
     }
 }

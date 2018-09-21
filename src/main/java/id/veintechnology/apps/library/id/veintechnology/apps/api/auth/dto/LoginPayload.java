@@ -4,10 +4,10 @@ import javax.validation.constraints.NotNull;
 
 public class LoginPayload {
 
-    @NotNull
+    @NotNull(message = "Username cannot be null.")
     private String username;
 
-    @NotNull
+    @NotNull(message = "Password cannot be null.")
     private String password;
 
     public LoginPayload() {

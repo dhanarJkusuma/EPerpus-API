@@ -25,7 +25,7 @@ public class CreateBookPayload {
 
     private int totalStock;
 
-    private List<String> categoryCode;
+    private Set<String> categoryCode;
 
     public CreateBookPayload() {
         this.totalStock = 1;
@@ -87,11 +87,11 @@ public class CreateBookPayload {
         this.totalStock = totalStock;
     }
 
-    public List<String> getCategoryCode() {
+    public Set<String> getCategoryCode() {
         return categoryCode;
     }
 
-    public void setCategoryCode(List<String> categoryCode) {
+    public void setCategoryCode(Set<String> categoryCode) {
         this.categoryCode = categoryCode;
     }
 }

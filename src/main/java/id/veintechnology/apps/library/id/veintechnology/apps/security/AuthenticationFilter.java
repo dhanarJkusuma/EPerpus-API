@@ -21,7 +21,7 @@ public class AuthenticationFilter extends OncePerRequestFilter{
         if(authHeader != null){
             String[] explodedHeader = authHeader.split(" ");
             if(explodedHeader.length >= 2){
-                if(explodedHeader[0].equals("VEINTECH")){
+                if(explodedHeader[0].equals("BEEHIVE")){
                     String token = explodedHeader[1];
                     Authentication auth = new AuthenticationToken(token);
                     SecurityContextHolder.getContext().setAuthentication(auth);

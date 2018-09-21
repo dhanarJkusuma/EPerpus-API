@@ -56,7 +56,7 @@ public class TransactionApi {
         }catch (BookNotFoundException e){
             logger.error(e.getMessage());
             response.put("status", false);
-            response.put("message", "Code buku tidak diketahui : " + e.getCodes());
+            response.put("message", "Code buku tidak diketahui : " );
             return ResponseEntity.badRequest().body(response);
         }
 

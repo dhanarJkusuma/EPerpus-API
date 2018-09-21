@@ -5,10 +5,14 @@ import id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.Create
 import id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.UpdateBookPayload;
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Book;
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Category;
+import id.veintechnology.apps.library.id.veintechnology.apps.error_handler.BaseErrorHandler;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.category.exception.CategoryNotFoundException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.BookService;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.DuplicateBookCodeException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.category.CategoryService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,9 +21,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 @RestController
 @RequestMapping("/api/v1/book")
-public class BookApi {
+public class BookApi extends BaseErrorHandler {
     private final BookService bookService;
     private final CategoryService categoryService;
 
@@ -46,61 +53,54 @@ public class BookApi {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createBook(@RequestBody @Validated CreateBookPayload payload){
-        Set<Category> categories = categoryService.findByCategoryCodes(payload.getCategoryCode());
-        Set<String> categoryCodes = new HashSet<>(payload.getCategoryCode());
         Map<String, Object> response = new HashMap<>();
-
-        if(categories.size() != categoryCodes.size()){
-            Set<String> foundedCategories = categories.stream().map(Category::getCode).collect(Collectors.toSet());
-            categoryCodes.removeAll(foundedCategories);
-
-            response.put("success", false);
-            response.put("message", "Gagal menambahkan buku, Beberapa kategori tidak ditemukan. kode kategori: " + collectUnknownCategory(categoryCodes));
-            return ResponseEntity.badRequest().body(response);
-        }
         Book book = BookMapper.toBookDao(payload);
-        book.setCategories(categories);
         try{
-            Book createdBook = bookService.createNewBook(book);
+            Book createdBook = bookService.createNewBook(book, payload.getCategoryCode());
             response.put("success", true);
-            response.put("message", "Berhasil menambahkan data buku. ");
-            response.put("data", BookMapper.toBookDto(createdBook));
+            response.put("message", "Book inserted successfully. ");
+            response.put("data", createdBook);
             return ResponseEntity.ok(response);
         }catch (DuplicateBookCodeException e){
             response.put("success", false);
-            response.put("message", "Gagal menambahkan data buku, " + e.getMessage());
-            return ResponseEntity.ok(response);
+            response.put("message", "Duplicate Book, Book's code is already exist. ");
+            return new ResponseEntity<>(response, BAD_REQUEST);
+        }catch (DataIntegrityViolationException e){
+            response.put("success", false);
+            response.put("message", "Failed to insert new book, some category doesn't exist.");
+            return new ResponseEntity<>(response, BAD_REQUEST);
+        }catch (RuntimeException e){
+            response.put("success", false);
+            response.put("message", "Internal Server Error");
+            return new ResponseEntity<>(response, INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping(path = "/{code}")
     public ResponseEntity updateBook(@PathVariable("code") String code, @RequestBody @Validated UpdateBookPayload payload){
         Book book = bookService.findByCode(code);
-
         if(book == null){
             return ResponseEntity.notFound().build();
         }
-
-        Set<Category> categories = categoryService.findByCategoryCodes(payload.getCategoryCode());
-        Set<String> categoryCodes = new HashSet<>(payload.getCategoryCode());
         Map<String, Object> response = new HashMap<>();
+        book = BookMapper.toBookDao(book, payload);
 
-        if(categories.size() != categoryCodes.size()){
-            Set<String> foundedCategories = categories.stream().map(Category::getCode).collect(Collectors.toSet());
-            categoryCodes.removeAll(foundedCategories);
-
+        Book updatedBook = bookService.updateBook(book, payload.getCategoryCode());
+        try {
+            response.put("success", true);
+            response.put("message", "Book updated successfully.");
+            response.put("data", BookMapper.toBookDto(updatedBook));
+            return ResponseEntity.ok(response);
+        }catch (DataIntegrityViolationException e){
             response.put("success", false);
-            response.put("message", "Gagal mengubah buku, kode buku: " + code + ", Beberapa kategori tidak ditemukan. kode kategori: " + collectUnknownCategory(categoryCodes));
-            return ResponseEntity.badRequest().body(response);
+            response.put("message", "Failed to update book, some category doesn't exist.");
+            return new ResponseEntity<>(response, BAD_REQUEST);
+        }catch (RuntimeException e){
+            response.put("success", false);
+            response.put("message", "Internal Server Error");
+            return new ResponseEntity<>(response, INTERNAL_SERVER_ERROR);
         }
 
-        book = BookMapper.toBookDao(book, payload);
-        book.setCategories(categories);
-        Book updatedBook = bookService.updateBook(book);
-        response.put("success", true);
-        response.put("message", "Berhasil mengubah data buku. kode buku " + code);
-        response.put("data", BookMapper.toBookDto(updatedBook));
-        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/{code}")
@@ -109,7 +109,6 @@ public class BookApi {
         if(book == null){
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(BookMapper.toBookDto(book));
     }
 

@@ -25,7 +25,7 @@ public class Application {
 	static class MainX{
 		public static void main(String... x){
 			PasswordEncoder encoder = new BCryptPasswordEncoder();
-			System.out.print(encoder.encode("$VeinAdminLibrary$"));
+			System.out.print(encoder.encode("tawon123"));
 		}
 	}
 }

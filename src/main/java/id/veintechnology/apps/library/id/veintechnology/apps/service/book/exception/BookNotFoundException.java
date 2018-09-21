@@ -1,14 +1,17 @@
 package id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception;
 
-public class BookNotFoundException extends RuntimeException {
-    private String codes;
+import id.veintechnology.apps.library.id.veintechnology.apps.error_handler.response.ExceptionResponse;
 
-    public BookNotFoundException(String codes) {
-        super("Unknown Book Exception, codes : " + codes + " !!!");
-        this.codes = codes;
+public class BookNotFoundException extends RuntimeException implements ExceptionResponse {
+    private String code;
+
+    public BookNotFoundException(String code) {
+        super("[Exception] Book with code : " + code + " doesn't exist. ");
+        this.code = code;
     }
 
-    public String getCodes() {
-        return codes;
+    @Override
+    public String getMessage(){
+        return "Book with code : " + code + " doesn't exist. ";
     }
 }

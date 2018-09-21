@@ -3,6 +3,7 @@ package id.veintechnology.apps.library.id.veintechnology.apps.service.category;
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Category;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public interface CategoryService {
 
     List<Category> retrieveAll();
 
-    Set<Category> findByCategoryCodes(List<String> codes);
+    Set<Category> findByCategoryCodes(Collection<String> codes);
 
     Category destroyCategory(Category category);
 }
