@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.NonNull;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
@@ -18,7 +19,6 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 
     Book findFirstByCode(String code);
 
-    Book findById(Long bookId);
 
     List<Book> findByCodeIn(Collection<String> codes);
 
