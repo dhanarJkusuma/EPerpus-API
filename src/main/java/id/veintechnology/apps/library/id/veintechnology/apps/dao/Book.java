@@ -29,6 +29,9 @@ public class Book {
     @Column(name = "publisher")
     private String publisher;
 
+    @Column(name = "cover_image")
+    private String coverImage;
+
     @Column(name = "year")
     private int year;
 
@@ -103,6 +106,14 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
     public int getYear() {
         return year;
     }
@@ -153,6 +164,7 @@ public class Book {
         private int year;
         private int stock;
         private int totalStock;
+        private String coverImage;
         private Set<Category> categories = new HashSet<>();
 
         public static Builder newBuilder() {
@@ -181,6 +193,11 @@ public class Book {
 
         public Builder publisher(String publisher){
             this.publisher = publisher;
+            return this;
+        }
+
+        public Builder coverImage(String coverImage){
+            this.coverImage = coverImage;
             return this;
         }
 
@@ -215,6 +232,7 @@ public class Book {
             book.setStock(stock);
             book.setTotalStock(totalStock);
             book.setCategories(categories);
+            book.setCoverImage(coverImage);
             return book;
         }
     }

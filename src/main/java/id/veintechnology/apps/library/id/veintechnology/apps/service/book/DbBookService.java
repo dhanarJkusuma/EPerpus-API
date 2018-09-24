@@ -6,6 +6,8 @@ import id.veintechnology.apps.library.id.veintechnology.apps.repository.BookRepo
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.DuplicateBookCodeException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.BookNotFoundException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.category.CategoryService;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.storage.StorageService;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.storage.exception.StorageErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -13,22 +15,26 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Service
-public class DbBookService implements BookService{
+public class DbBookService implements BookService {
 
     private final BookRepository bookRepository;
     private final CategoryService categoryService;
+    private final StorageService storageService;
 
     @Autowired
-    public DbBookService(BookRepository bookRepository, CategoryService categoryService) {
+    public DbBookService(BookRepository bookRepository, CategoryService categoryService, StorageService storageService) {
         this.bookRepository = bookRepository;
         this.categoryService = categoryService;
+        this.storageService = storageService;
     }
 
     @Override
@@ -43,12 +49,17 @@ public class DbBookService implements BookService{
         if(existBook != null){
             throw new DuplicateBookCodeException(existBook.getCode());
         }
-        return bookRepository.save(book);
+        existBook = bookRepository.save(book);
+        existBook = fillCoverImage(existBook);
+        return existBook;
     }
 
     @Override
     public Book removeAllCategories(Book book) {
         book.getCategories().removeAll(book.getCategories());
+        // Book updatedBook = bookRepository.saveAndFlush(book);
+        // updatedBook.setCoverImage(storageService.composeImageUrl(updatedBook.getCoverImage()));
+        // return updatedBook;
         return bookRepository.saveAndFlush(book);
     }
 
@@ -60,12 +71,18 @@ public class DbBookService implements BookService{
     @Override
     public Book findById(Long bookId) {
         Optional<Book> existBook = bookRepository.findById(bookId);
-        return existBook.orElse(null);
+        if(!existBook.isPresent()){
+            return null;
+        }
+        Book book = existBook.get();
+        book = fillCoverImage(book);
+        return book;
     }
 
     @Override
     public List<Book> findByCodes(List<String> codes) {
-        return bookRepository.findByCodeIn(codes);
+        List<Book> books = bookRepository.findByCodeIn(codes);
+        return books.stream().peek(this::fillCoverImage).collect(Collectors.toList());
     }
 
     @Override
@@ -93,13 +110,34 @@ public class DbBookService implements BookService{
         if(categories.size() > 0){
             book.setCategories(categories);
         }
+
+        Book updatedBook = bookRepository.save(book);
+        updatedBook = fillCoverImage(updatedBook);
+        return updatedBook;
+    }
+
+    @Override
+    public Book uploadCover(String code, MultipartFile file) throws BookNotFoundException, StorageErrorException{
+        // get existing book
+        Book book = findByCode(code);
+        if(book == null){
+            throw new BookNotFoundException(code);
+        }
+
+        // upload file
+        String rootPath = storageService.getRootPath().toString();
+        Path path = storageService.store(file, "/", code, true);
+        String pathImage = path.toString().replace(rootPath, "");
+        book.setCoverImage(pathImage);
         return bookRepository.save(book);
     }
 
     @Override
     public Book borrowBook(Book book) {
         book.setStock(book.getStock() - 1);
-        return bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
+        savedBook = fillCoverImage(savedBook);
+        return savedBook;
     }
 
     @Override
@@ -124,9 +162,19 @@ public class DbBookService implements BookService{
     }
 
     @Override
+    public Book fillCoverImage(Book book) {
+        if(book.getCoverImage() == null){
+            book.setCoverImage(storageService.composeStaticUrl("/no_image.jpg"));
+            return book;
+        }
+        book.setCoverImage(storageService.composeImageUrl(book.getCoverImage()));
+        return book;
+    }
+
+    @Override
     public Page<Book> searchBook(String query, int size, int page) {
         Pageable pageRequest = new PageRequest(page, size);
-        return bookRepository.searchBookByTitle(query, pageRequest);
+        return bookRepository.searchBookByTitle(query.toLowerCase(), pageRequest);
     }
 
     @Override

@@ -63,6 +63,7 @@ public class BookMapper {
                 .year(book.getYear())
                 .stock(book.getStock())
                 .totalStock(book.getTotalStock())
+                .coverImage(book.getCoverImage())
                 .category(categoryDtoSet)
                 .createdOn(book.getCreatedOn())
                 .build();

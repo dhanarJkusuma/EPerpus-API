@@ -54,6 +54,7 @@ public class DbTransactionService implements TransactionService{
             }
         });
 
+        // replace with trx
         OrderTransaction saved = orderTransactionRepository.save(transaction);
         if(saved != null){
            saved.getItems().forEach(i -> bookService.subtractStockByBookId(i.getBookId(), i.getQuantity()));

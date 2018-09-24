@@ -6,33 +6,44 @@ import id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.Update
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Book;
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Category;
 import id.veintechnology.apps.library.id.veintechnology.apps.error_handler.BaseErrorHandler;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.BookNotFoundException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.category.exception.CategoryNotFoundException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.BookService;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.DuplicateBookCodeException;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.category.CategoryService;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.storage.StorageService;
+import id.veintechnology.apps.library.id.veintechnology.apps.service.storage.exception.StorageErrorException;
+import javassist.NotFoundException;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("/api/v1/book")
 public class BookApi extends BaseErrorHandler {
     private final BookService bookService;
     private final CategoryService categoryService;
+    private final StorageService storageService;
 
-    public BookApi(BookService bookService, CategoryService categoryService) {
+    public BookApi(BookService bookService, CategoryService categoryService, StorageService storageService) {
         this.bookService = bookService;
         this.categoryService = categoryService;
+        this.storageService = storageService;
     }
 
     @GetMapping
@@ -41,7 +52,10 @@ public class BookApi extends BaseErrorHandler {
             @RequestParam(name = "size", required = false, defaultValue = "255") int size
     ){
         Page<Book> results = bookService.retrieveBook(size, page);
-        List<BookDto> data = results.getContent().stream().map(BookMapper::toBookDto).collect(Collectors.toList());
+        List<BookDto> data = results.getContent().stream().map(r -> {
+            r = bookService.fillCoverImage(r);
+            return BookMapper.toBookDto(r);
+        }).collect(Collectors.toList());
         Map<String, Object> response = new HashMap<>();
         response.put("totalPage", results.getTotalPages());
         response.put("totalElements", results.getTotalElements());
@@ -52,7 +66,7 @@ public class BookApi extends BaseErrorHandler {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createBook(@RequestBody @Validated CreateBookPayload payload){
+    public ResponseEntity createBook(@RequestBody @Valid CreateBookPayload payload){
         Map<String, Object> response = new HashMap<>();
         Book book = BookMapper.toBookDao(payload);
         try{
@@ -76,14 +90,41 @@ public class BookApi extends BaseErrorHandler {
         }
     }
 
+    @PostMapping(path = "/upload/{code}")
+    public ResponseEntity uploadImage(
+            @PathVariable("code") String code,
+            @RequestParam("cover") MultipartFile file
+    ){
+        Map<String, Object> response = new HashMap<>();
+        Book updatedBook = bookService.uploadCover(code, file);
+        try {
+            response.put("success", true);
+            response.put("message", "Book updated successfully.");
+            response.put("data", BookMapper.toBookDto(updatedBook));
+            return ResponseEntity.ok(response);
+        }catch (BookNotFoundException e){
+            response.put("success", false);
+            response.put("message", "Book not found. ");
+            return new ResponseEntity<>(response, NOT_FOUND);
+        }catch (StorageErrorException e){
+            response.put("success", false);
+            response.put("message", "Internal Server Error");
+            return new ResponseEntity<>(response, INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping(path = "/{code}")
-    public ResponseEntity updateBook(@PathVariable("code") String code, @RequestBody @Validated UpdateBookPayload payload){
+    public ResponseEntity updateBook(@PathVariable("code") String code, @RequestBody @Valid UpdateBookPayload payload){
         Book book = bookService.findByCode(code);
         if(book == null){
             return ResponseEntity.notFound().build();
         }
         Map<String, Object> response = new HashMap<>();
+
+        int deltaStock = book.getTotalStock() - payload.getTotalStock();
+
         book = BookMapper.toBookDao(book, payload);
+        book.setTotalStock(deltaStock);
 
         Book updatedBook = bookService.updateBook(book, payload.getCategoryCode());
         try {
@@ -112,6 +153,16 @@ public class BookApi extends BaseErrorHandler {
         return ResponseEntity.ok(BookMapper.toBookDto(book));
     }
 
+    @DeleteMapping(path = "/{code}")
+    public ResponseEntity deleteBook(@PathVariable("code") String code){
+        Book book = bookService.findByCode(code);
+        if(book == null){
+            return ResponseEntity.notFound().build();
+        }
+        bookService.destroyBook(book);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping(path = "/search")
     public ResponseEntity searchBook(
             @RequestParam(name = "query") String query,
@@ -119,7 +170,10 @@ public class BookApi extends BaseErrorHandler {
             @RequestParam(name = "page", defaultValue = "0") int page
     ){
         Page<Book> results = bookService.searchBook(query, size, page);
-        List<BookDto> data = results.getContent().stream().map(BookMapper::toBookDto).collect(Collectors.toList());
+        List<BookDto> data = results.getContent().stream().map(r -> {
+            r = bookService.fillCoverImage(r);
+            return BookMapper.toBookDto(r);
+        }).collect(Collectors.toList());
         Map<String, Object> response = new HashMap<>();
         response.put("totalPage", results.getTotalPages());
         response.put("totalElements", results.getTotalElements());
@@ -136,7 +190,10 @@ public class BookApi extends BaseErrorHandler {
             @RequestParam(name = "page", defaultValue = "0") int page
     ){
         Page<Book> results = bookService.fetchBookByCategory(category, size, page);
-        List<BookDto> data = results.getContent().stream().map(BookMapper::toBookDto).collect(Collectors.toList());
+        List<BookDto> data = results.getContent().stream().map(r -> {
+            r = bookService.fillCoverImage(r);
+            return BookMapper.toBookDto(r);
+        }).collect(Collectors.toList());
         Map<String, Object> response = new HashMap<>();
         response.put("totalPage", results.getTotalPages());
         response.put("totalElements", results.getTotalElements());

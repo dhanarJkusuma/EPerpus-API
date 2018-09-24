@@ -3,6 +3,7 @@ package id.veintechnology.apps.library.id.veintechnology.apps.service.book;
 import id.veintechnology.apps.library.id.veintechnology.apps.dao.Book;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.book.exception.BookNotFoundException;
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,8 @@ public interface BookService {
 
     Book updateBook(Book book, Set<String> categories);
 
+    Book uploadCover(String code, MultipartFile file);
+
     Book borrowBook(Book book);
 
     void updateStockBooks(Book book, int quantity);
@@ -33,6 +36,8 @@ public interface BookService {
     void subtractStockByBookId(Long bookId, int quantity);
 
     Book destroyBook(Book book);
+
+    Book fillCoverImage(Book book);
 
     Page<Book> searchBook(String query, int size, int page);
 

@@ -32,6 +32,8 @@ public class BookDto {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date createdOn;
 
+    private String coverImage;
+
     private Set<CategoryDto> categories = new HashSet<>();
 
     public BookDto() {
@@ -117,6 +119,14 @@ public class BookDto {
         this.categories = categories;
     }
 
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
     public static class Builder{
 
         private String code;
@@ -124,6 +134,7 @@ public class BookDto {
         private String author;
         private String editor;
         private String publisher;
+        private String coverImage;
         private int year;
         private int stock;
         private int totalStock;
@@ -156,6 +167,11 @@ public class BookDto {
 
         public BookDto.Builder publisher(String publisher){
             this.publisher = publisher;
+            return this;
+        }
+
+        public BookDto.Builder coverImage(String coverImage){
+            this.coverImage = coverImage;
             return this;
         }
 
@@ -196,6 +212,7 @@ public class BookDto {
             book.setTotalStock(totalStock);
             book.setCategories(categories);
             book.setCreatedOn(createdOn);
+            book.setCoverImage(coverImage);
             return book;
         }
     }

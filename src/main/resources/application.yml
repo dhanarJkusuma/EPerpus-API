@@ -27,6 +27,11 @@ logging:
        springframework:
          security: DEBUG
 
+storage:
+  base-path: D://sip
+  base-url: http://localhost:8080/storage/image/custom
+  static-url: http://localhost:8080/storage/image
+
 
 
 

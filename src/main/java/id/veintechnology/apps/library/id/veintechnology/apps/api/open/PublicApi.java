@@ -35,4 +35,15 @@ public class PublicApi{
                 .body(file);
     }
 
+    @GetMapping(path = "/custom/{hash}/{filename:.+}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public ResponseEntity<Resource> getCustomFile(@PathVariable("hash") String hashFolder, @PathVariable("filename") String filename) {
+        String filePath = String.join("/", hashFolder, filename);
+        Resource file = storageService.loadCustomResource(filePath);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .body(file);
+    }
+
+
 }
