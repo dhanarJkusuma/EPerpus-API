@@ -11,6 +11,8 @@ public interface CategoryService {
 
     Category createNewCategory(Category category);
 
+    Category updateCategory(Category category);
+
     @Nullable
     Category findByCategoryName(String categoryName);
 

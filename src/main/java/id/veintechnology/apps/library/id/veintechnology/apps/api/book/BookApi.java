@@ -120,11 +120,22 @@ public class BookApi extends BaseErrorHandler {
             return ResponseEntity.notFound().build();
         }
         Map<String, Object> response = new HashMap<>();
-
-        int deltaStock = book.getTotalStock() - payload.getTotalStock();
+        int oldTotalStock = book.getTotalStock();
+        int oldStock = book.getStock();
 
         book = BookMapper.toBookDao(book, payload);
-        book.setTotalStock(deltaStock);
+        book.setTotalStock(payload.getTotalStock());
+
+        int deltaStock = 0;
+        if(payload.getTotalStock() > oldTotalStock){
+            deltaStock = payload.getTotalStock() - oldTotalStock;
+            book.setStock(oldStock + deltaStock);
+        }else{
+            deltaStock = oldTotalStock - payload.getTotalStock();
+            book.setStock(oldStock - deltaStock);
+
+        }
+
 
         Book updatedBook = bookService.updateBook(book, payload.getCategoryCode());
         try {

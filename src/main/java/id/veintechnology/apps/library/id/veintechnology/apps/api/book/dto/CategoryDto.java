@@ -2,11 +2,14 @@ package id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class CategoryDto {
 
     private String code;
+
+    @NotNull(message = "category cannot be null.")
     private String category;
 
     @JsonFormat(pattern="yyyy-MM-dd")

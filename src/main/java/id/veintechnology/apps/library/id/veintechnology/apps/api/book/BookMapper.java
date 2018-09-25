@@ -45,7 +45,6 @@ public class BookMapper {
         book.setTitle(payload.getTitle());
         book.setAuthor(payload.getAuthor());
         book.setYear(payload.getYear());
-        book.setStock(payload.getStock());
         book.setTotalStock(payload.getTotalStock());
         book.setEditor(payload.getEditor());
         book.setPublisher(payload.getPublisher());

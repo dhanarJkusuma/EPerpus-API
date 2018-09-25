@@ -12,10 +12,10 @@ import java.util.Set;
 
 public class BookDto {
 
-    @NotNull
+    @NotNull(message = "Book's code cannot be null.")
     private String code;
 
-    @NotNull
+    @NotNull(message = "Book's title cannot be null.")
     private String title;
 
     private String author;

@@ -1,11 +1,11 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost/sip
-    username: beehive_tech
-    password: beeisgood
+    username: root
+    password: root
     driverClassName: org.postgresql.Driver
   jpa:
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         jdbc:
@@ -17,7 +17,7 @@ spring:
 
 auth:
   hash:
-    seed: 48DkxzVnME4RSJXqcmOzGfNdXZZiYlTXLPVdV
+    seed: rahasia
   token:
     expiredInDays: 14
 

@@ -1,10 +1,12 @@
 package id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class CreateCategoryPayload {
 
-    @NotNull
+    @NotNull(message = "category cannot be null.")
+    @NotEmpty(message = "category cannot be empty.")
     private String category;
 
     public CreateCategoryPayload() {

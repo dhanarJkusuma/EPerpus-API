@@ -30,6 +30,11 @@ public class DbCategoryService implements CategoryService {
     }
 
     @Override
+    public Category updateCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    @Override
     @Nullable
     public Category findByCategoryName(String categoryName) {
         String lowCaseName = categoryName.trim().toLowerCase();

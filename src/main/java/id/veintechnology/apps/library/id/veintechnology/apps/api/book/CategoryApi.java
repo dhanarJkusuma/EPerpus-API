@@ -6,16 +6,20 @@ import id.veintechnology.apps.library.id.veintechnology.apps.dao.Category;
 import id.veintechnology.apps.library.id.veintechnology.apps.security.User;
 import id.veintechnology.apps.library.id.veintechnology.apps.service.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
 @RestController
@@ -35,14 +39,42 @@ public class CategoryApi {
         if(existCategory != null){
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
-            response.put("message", "Gagal menambahkan kategori, data sudah ada.");
+            response.put("message", "Duplicate Category, Category name is already exists.");
             return ResponseEntity.badRequest().body(response);
         }
         Category category = CategoryMapper.mapToCategory(payload);
         CategoryDto categoryDto = CategoryMapper.mapToCategoryDto(categoryService.createNewCategory(category));
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
-        response.put("message", "Data berhasil ditambahkan.");
+        response.put("message", "Category created successfully.");
+        response.put("data", categoryDto);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping(path = "/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateCategory(@PathVariable("code") String code, @RequestBody @Validated CreateCategoryPayload payload){
+        Category existCategoryByName = categoryService.findByCategoryName(payload.getCategory());
+        if(existCategoryByName != null){
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Duplicate Category, Category name is already exists.");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        Category existCategory = categoryService.findByCategoryCode(code);
+        if(existCategory == null){
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Category doesn't exists.");
+            return new ResponseEntity<>(response, NOT_FOUND);
+        }
+
+        existCategory.setName(payload.getCategory());
+        CategoryDto categoryDto = CategoryMapper.mapToCategoryDto(categoryService.updateCategory(existCategory));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Category updated successfully.");
         response.put("data", categoryDto);
         return ResponseEntity.ok(response);
     }
@@ -68,12 +100,8 @@ public class CategoryApi {
         if(existCategory == null){
             return ResponseEntity.notFound().build();
         }
-        Category deletedCategory = categoryService.destroyCategory(existCategory);
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("message", "Data berhasil dihapus.");
-        response.put("data", deletedCategory);
-        return ResponseEntity.ok(response);
+        categoryService.destroyCategory(existCategory);
+        return ResponseEntity.noContent().build();
     }
 
 

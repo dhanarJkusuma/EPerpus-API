@@ -14,7 +14,8 @@ import java.util.Set;
 
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 
-    Category findFirstByName(String categoryName);
+    @Query("select c from Category c where lower(c.name)= :name")
+    Category findFirstByName(@Param("name") String categoryName);
 
     Category findOneByCode(String categoryCode);
 

@@ -1,5 +1,6 @@
 package id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
@@ -7,6 +8,7 @@ import java.util.Set;
 public class UpdateBookPayload {
 
     @NotNull
+    @NotEmpty(message = "category cannot be empty.")
     private String title;
 
     private String author;
