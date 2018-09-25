@@ -66,18 +66,18 @@ public class TransactionApi {
         }catch(DuplicateTransactionCodeException e){
             logger.error(e.getMessage());
             response.put("status", false);
-            response.put("message", "Gagal menambahkan transaksi, transaksi dengan kode : " + e.getInvalidCode());
+            response.put("message", "Failed to create new transaction, transaction with code : " + e.getInvalidCode());
             return ResponseEntity.badRequest().body(response);
         }catch (BookNotAvailableException e){
             logger.error(e.getMessage());
             response.put("status", false);
-            response.put("message", "Gagal menambahkan transaksi. Buku tidak tersedia, kode buku : " + e.getBookCode());
+            response.put("message", "Failed to create new transaction, book doesn't exists, book's code : " + e.getBookCode());
             return ResponseEntity.badRequest().body(response);
         }
 
         TransactionDto transactionResponse = TransactionMapper.toTransactionDto(transaction);
         response.put("status", true);
-        response.put("message", "Berhasil menambahkan transaksi. ");
+        response.put("message", "Transaction added successfully.");
         response.put("data", transactionResponse);
 
         return ResponseEntity.ok(response);
@@ -120,7 +120,7 @@ public class TransactionApi {
         }
         Map<String, Object> response = new HashMap<>();
         response.put("status", true);
-        response.put("message", "Berhasil menyelesaikan transaksi. ");
+        response.put("message", "Book has been returned successfully.");
         response.put("data", TransactionMapper.toTransactionDto(transaction));
         return ResponseEntity.ok(response);
     }
@@ -138,7 +138,7 @@ public class TransactionApi {
         }
         Map<String, Object> response = new HashMap<>();
         response.put("status", true);
-        response.put("message", "Berhasil menyetujui pengembalian transaksi. ");
+        response.put("message", "Transaction has been approved successfully.");
         response.put("data", TransactionMapper.toTransactionDto(transaction));
         return ResponseEntity.ok(response);
     }
@@ -172,7 +172,7 @@ public class TransactionApi {
             return ResponseEntity.notFound().build();
         }
         response.put("success", true);
-        response.put("message", "Berhasil menghapus transaksi dengan code : " + transactionId);
+        response.put("message", "Transaction has been deleted successfully, within id : " + transactionId);
         response.put("data", deletedTransaction);
         return ResponseEntity.ok(response);
     }

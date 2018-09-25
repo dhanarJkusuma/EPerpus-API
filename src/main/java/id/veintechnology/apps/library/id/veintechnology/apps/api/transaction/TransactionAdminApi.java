@@ -53,7 +53,7 @@ public class TransactionAdminApi {
         }
         Map<String, Object> response = new HashMap<>();
         response.put("status", true);
-        response.put("message", "Berhasil menyetujui pengembalian transaksi. ");
+        response.put("message", "Transaction has been approved successfully.");
         response.put("data", TransactionMapper.toTransactionDto(transaction));
         return ResponseEntity.ok(response);
     }

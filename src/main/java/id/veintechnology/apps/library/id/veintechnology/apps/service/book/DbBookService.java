@@ -71,12 +71,7 @@ public class DbBookService implements BookService {
     @Override
     public Book findById(Long bookId) {
         Optional<Book> existBook = bookRepository.findById(bookId);
-        if(!existBook.isPresent()){
-            return null;
-        }
-        Book book = existBook.get();
-        book = fillCoverImage(book);
-        return book;
+        return existBook.orElse(null);
     }
 
     @Override
