@@ -39,9 +39,12 @@ public class DbStorageService implements StorageService{
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {
+                logger.error("[Library-API] ", "Resource is not readable. ");
                 throw new RuntimeException("FAIL!");
             }
         } catch (MalformedURLException e) {
+            logger.error("[Library-API] ", e.getCause());
+            e.printStackTrace();
             throw new RuntimeException("FAIL!");
         }
     }
