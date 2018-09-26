@@ -3,6 +3,7 @@
 /out/
 /gradle/
 !gradle/wrapper/gradle-wrapper.jar
+D:/
 
 ### STS ###
 .apt_generated
