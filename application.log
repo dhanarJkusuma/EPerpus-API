@@ -1,0 +1,279 @@
+2018-09-26 00:14:04.391  INFO 18475 --- [main] i.v.a.l.i.v.apps.Application             : Starting Application on vps488100 with PID 18475 (/apps/projects/library-is/api/build/libs/api-0.0.1-SNAPSHOT.jar started by root in /)
+2018-09-26 00:14:04.408  INFO 18475 --- [main] i.v.a.l.i.v.apps.Application             : No active profile set, falling back to default profiles: default
+2018-09-26 00:14:04.989  INFO 18475 --- [main] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6fffcba5: startup date [Wed Sep 26 00:14:04 EDT 2018]; root of context hierarchy
+2018-09-26 00:14:13.785  INFO 18475 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$463ab0f6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-26 00:14:15.495  INFO 18475 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 3014 (http)
+2018-09-26 00:14:15.587  INFO 18475 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-26 00:14:15.588  INFO 18475 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-26 00:14:15.627  INFO 18475 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-26 00:14:15.921  INFO 18475 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-09-26 00:14:15.923  INFO 18475 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 10935 ms
+2018-09-26 00:14:18.501  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-09-26 00:14:18.507  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-09-26 00:14:18.509  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-09-26 00:14:18.515  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-09-26 00:14:18.559  INFO 18475 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2018-09-26 00:14:18.562  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpTraceFilter' to: [/*]
+2018-09-26 00:14:18.563  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'authenticationFilter' to: [/*]
+2018-09-26 00:14:18.564  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsConfiguration' to: [/*]
+2018-09-26 00:14:18.565  INFO 18475 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2018-09-26 00:14:18.903  INFO 18475 --- [main] o.f.core.internal.util.VersionPrinter    : Flyway Community Edition 5.0.3 by Boxfuse
+2018-09-26 00:14:18.958  INFO 18475 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-26 00:14:19.307  INFO 18475 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-26 00:14:19.329  INFO 18475 --- [main] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:postgresql://localhost/library_is (PostgreSQL 9.5)
+2018-09-26 00:14:19.595  INFO 18475 --- [main] o.f.core.internal.command.DbValidate     : Successfully validated 10 migrations (execution time 00:00.104s)
+2018-09-26 00:14:19.675  INFO 18475 --- [main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1.1.9
+2018-09-26 00:14:19.677  INFO 18475 --- [main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2018-09-26 00:14:20.313  INFO 18475 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-09-26 00:14:20.389  INFO 18475 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-09-26 00:14:20.816  INFO 18475 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-09-26 00:14:20.828  INFO 18475 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-09-26 00:14:20.983  INFO 18475 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-09-26 00:14:22.075  INFO 18475 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2018-09-26 00:14:22.393  INFO 18475 --- [main] o.h.e.j.e.i.LobCreatorBuilderImpl        : HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2018-09-26 00:14:22.400  INFO 18475 --- [main] org.hibernate.type.BasicTypeRegistry     : HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@3f9342d4
+2018-09-26 00:14:25.103  INFO 18475 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-09-26 00:14:27.314  INFO 18475 --- [main] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2018-09-26 00:14:30.409 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'permitAll', for Ant [pattern='/storage/image/**']
+2018-09-26 00:14:30.415 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'hasRole('ROLE_ADMIN')', for Ant [pattern='/api/v1/category/**', DELETE]
+2018-09-26 00:14:30.485 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'permitAll', for Ant [pattern='/v1/ping']
+2018-09-26 00:14:30.488 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'permitAll', for Ant [pattern='/api/v1/auth/admin/login']
+2018-09-26 00:14:30.491 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'permitAll', for Ant [pattern='/api/v1/auth/login']
+2018-09-26 00:14:30.493 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'permitAll', for Ant [pattern='/api/v1/auth/register']
+2018-09-26 00:14:30.495 DEBUG 18475 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression 'authenticated', for org.springframework.security.web.util.matcher.AnyRequestMatcher@1
+2018-09-26 00:14:30.579 DEBUG 18475 --- [main] o.s.s.w.a.i.FilterSecurityInterceptor    : Validated configuration attributes
+2018-09-26 00:14:30.599 DEBUG 18475 --- [main] o.s.s.w.a.i.FilterSecurityInterceptor    : Validated configuration attributes
+2018-09-26 00:14:30.624  INFO 18475 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/api/v1/**'], [id.veintechnology.apps.library.id.veintechnology.apps.security.CorsConfiguration@45be7cd5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7651218e, org.springframework.security.web.context.SecurityContextPersistenceFilter@24fb6a80, org.springframework.security.web.header.HeaderWriterFilter@21d8bcbe, org.springframework.security.web.authentication.logout.LogoutFilter@3a94964, id.veintechnology.apps.library.id.veintechnology.apps.security.AuthenticationFilter@75323d6c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@72a85671, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ae33a11, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3185fa6b, org.springframework.security.web.session.SessionManagementFilter@7383eae2, org.springframework.security.web.access.ExceptionTranslationFilter@f74e835, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3efe7086]
+2018-09-26 00:14:30.644  WARN 18475 --- [main] o.s.s.c.a.web.builders.WebSecurity       : 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2018-09-26 00:14:31.159  INFO 18475 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-26 00:14:32.105  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6fffcba5: startup date [Wed Sep 26 00:14:04 EDT 2018]; root of context hierarchy
+2018-09-26 00:14:32.303  WARN 18475 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-09-26 00:14:32.565  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/auth/check-token],methods=[GET],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.auth.AuthApi.checkToken()
+2018-09-26 00:14:32.570  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/auth/admin/login],methods=[POST],produces=[application/json]}" onto public id.veintechnology.apps.library.id.veintechnology.apps.api.auth.dto.SessionDto id.veintechnology.apps.library.id.veintechnology.apps.api.auth.AuthApi.adminLogin(id.veintechnology.apps.library.id.veintechnology.apps.api.auth.dto.LoginPayload)
+2018-09-26 00:14:32.572  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/auth/admin/check-token],methods=[GET],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.auth.AuthApi.checkTokenAdmin(id.veintechnology.apps.library.id.veintechnology.apps.security.User)
+2018-09-26 00:14:32.574  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/auth/login],methods=[POST],produces=[application/json]}" onto public id.veintechnology.apps.library.id.veintechnology.apps.api.auth.dto.SessionDto id.veintechnology.apps.library.id.veintechnology.apps.api.auth.AuthApi.login(id.veintechnology.apps.library.id.veintechnology.apps.api.auth.dto.LoginPayload)
+2018-09-26 00:14:32.576  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/auth/logout],methods=[POST],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.auth.AuthApi.logout(id.veintechnology.apps.library.id.veintechnology.apps.security.User,java.lang.String)
+2018-09-26 00:14:32.579  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/auth/register],methods=[POST],produces=[application/json]}" onto public id.veintechnology.apps.library.id.veintechnology.apps.api.auth.dto.SessionDto id.veintechnology.apps.library.id.veintechnology.apps.api.auth.AuthApi.register(id.veintechnology.apps.library.id.veintechnology.apps.api.auth.dto.RegisterPayload)
+2018-09-26 00:14:32.588  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/admin/v1/transaction/in-complete],methods=[GET],produces=[application/json]}" onto public java.util.List<id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.dto.TransactionDto> id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionAdminApi.retrieveInCompleteTransaction()
+2018-09-26 00:14:32.590  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/admin/v1/transaction/{transactionId}/approve],methods=[PUT]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionAdminApi.approveTransactionReturn(java.lang.String)
+2018-09-26 00:14:32.592  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/admin/v1/transaction/history],methods=[GET]}" onto public java.util.List<id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.dto.TransactionDto> id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionAdminApi.retriveTransaction(java.lang.String,java.lang.String)
+2018-09-26 00:14:32.601  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction],methods=[POST],consumes=[application/json],produces=[application/json]}" onto public synchronized org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.createTransaction(id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.dto.TransactionPayload,id.veintechnology.apps.library.id.veintechnology.apps.dao.Member)
+2018-09-26 00:14:32.605  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction/in-complete],methods=[GET],produces=[application/json]}" onto public java.util.List<id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.dto.TransactionDto> id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.retrieveInCompleteTransaction(id.veintechnology.apps.library.id.veintechnology.apps.dao.Member)
+2018-09-26 00:14:32.606  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction/{transactionId}/approved],methods=[PUT]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.approveTransactionReturn(java.lang.String)
+2018-09-26 00:14:32.608  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction/return/{publicId}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.completeTransaction(id.veintechnology.apps.library.id.veintechnology.apps.dao.Member,id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.dto.CompleteTransactionPayloadDto,java.lang.String)
+2018-09-26 00:14:32.609  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction/{transactionId}],methods=[GET],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.findTransaction(java.lang.String)
+2018-09-26 00:14:32.614  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction],methods=[GET],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.retrieveTransaction(int,int)
+2018-09-26 00:14:32.658  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/transaction/{transactionId}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.transaction.TransactionApi.deleteTransaction(java.lang.String)
+2018-09-26 00:14:32.664  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/storage/image/custom/{hash}/{filename:.+}],methods=[GET],produces=[image/jpeg]}" onto public org.springframework.http.ResponseEntity<org.springframework.core.io.Resource> id.veintechnology.apps.library.id.veintechnology.apps.api.open.PublicApi.getCustomFile(java.lang.String,java.lang.String)
+2018-09-26 00:14:32.665  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/storage/image/{filename:.+}],methods=[GET],produces=[image/jpeg]}" onto public org.springframework.http.ResponseEntity<org.springframework.core.io.Resource> id.veintechnology.apps.library.id.veintechnology.apps.api.open.PublicApi.getFile(java.lang.String)
+2018-09-26 00:14:32.672  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book/upload/{code}],methods=[POST]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.uploadImage(java.lang.String,org.springframework.web.multipart.MultipartFile)
+2018-09-26 00:14:32.674  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book/{code}],methods=[GET]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.detailBook(java.lang.String)
+2018-09-26 00:14:32.685  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book/{code}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.deleteBook(java.lang.String)
+2018-09-26 00:14:32.687  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book/category/{categoryCode}],methods=[GET]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.getByCategory(java.lang.String,int,int)
+2018-09-26 00:14:32.689  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book],methods=[POST],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.createBook(id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.CreateBookPayload)
+2018-09-26 00:14:32.690  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book/{code}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.updateBook(java.lang.String,id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.UpdateBookPayload)
+2018-09-26 00:14:32.692  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book/search],methods=[GET]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.searchBook(java.lang.String,int,int)
+2018-09-26 00:14:32.695  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/book],methods=[GET]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.BookApi.retrieveBook(int,int)
+2018-09-26 00:14:32.700  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/category/{code}],methods=[PUT],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.CategoryApi.updateCategory(java.lang.String,id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.CreateCategoryPayload)
+2018-09-26 00:14:32.703  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/category],methods=[GET],produces=[application/json]}" onto public java.util.List<id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.CategoryDto> id.veintechnology.apps.library.id.veintechnology.apps.api.book.CategoryApi.retrieveCategory()
+2018-09-26 00:14:32.704  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/category/{code}],methods=[GET],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.CategoryApi.detailCategory(java.lang.String)
+2018-09-26 00:14:32.706  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/category/{code}],methods=[DELETE],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.CategoryApi.destroyCategoru(java.lang.String,id.veintechnology.apps.library.id.veintechnology.apps.security.User)
+2018-09-26 00:14:32.708  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/api/v1/category],methods=[POST],produces=[application/json]}" onto public org.springframework.http.ResponseEntity id.veintechnology.apps.library.id.veintechnology.apps.api.book.CategoryApi.createCategory(id.veintechnology.apps.library.id.veintechnology.apps.api.book.dto.CreateCategoryPayload)
+2018-09-26 00:14:32.714  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-09-26 00:14:32.716  INFO 18475 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-09-26 00:14:32.880  INFO 18475 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-26 00:14:32.882  INFO 18475 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-26 00:14:32.974  INFO 18475 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in bookApi
+2018-09-26 00:14:32.975  INFO 18475 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in baseErrorHandler
+2018-09-26 00:14:34.784  INFO 18475 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-09-26 00:14:34.808  INFO 18475 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2018-09-26 00:14:34.811  INFO 18475 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2018-09-26 00:14:34.813  INFO 18475 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-09-26 00:14:35.026  INFO 18475 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-09-26 00:14:35.032  INFO 18475 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-09-26 00:14:35.063  INFO 18475 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-09-26 00:14:35.187  INFO 18475 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 3014 (http) with context path ''
+2018-09-26 00:14:35.196  INFO 18475 --- [main] i.v.a.l.i.v.apps.Application             : Started Application in 34.21 seconds (JVM running for 36.384)
+2018-09-26 00:14:41.387  INFO 18475 --- [http-nio-3014-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-26 00:14:41.393  INFO 18475 --- [http-nio-3014-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2018-09-26 00:14:41.432  INFO 18475 --- [http-nio-3014-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 38 ms
+2018-09-26 00:14:41.479 DEBUG 18475 --- [http-nio-3014-exec-1] o.s.s.w.u.matcher.AntPathRequestMatcher  : Checking match of request : '/storage/image/no_image.jpg'; against '/api/v1/**'
+2018-09-26 00:14:41.483  INFO 18475 --- [http-nio-3014-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/storage/image/no_image.jpg':
+
+org.apache.catalina.connector.RequestFacade@167dfbbb
+
+servletPath:/storage/image/no_image.jpg
+pathInfo:null
+headers: 
+host: 185.201.9.77:3014
+connection: keep-alive
+cache-control: max-age=0
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+accept-encoding: gzip, deflate
+accept-language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: no match
+
+
+************************************************************
+
+
+2018-09-26 00:14:41.491 DEBUG 18475 --- [http-nio-3014-exec-1] o.s.s.w.u.matcher.AntPathRequestMatcher  : Checking match of request : '/storage/image/no_image.jpg'; against '/api/v1/**'
+2018-09-26 00:14:41.493 DEBUG 18475 --- [http-nio-3014-exec-1] o.s.security.web.FilterChainProxy        : /storage/image/no_image.jpg has no matching filters
+2018-09-26 00:14:41.690 ERROR 18475 --- [http-nio-3014-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.RuntimeException: FAIL!] with root cause
+
+java.lang.RuntimeException: FAIL!
+	at id.veintechnology.apps.library.id.veintechnology.apps.service.storage.DbStorageService.loadFile(DbStorageService.java:42) ~[classes!/:na]
+	at id.veintechnology.apps.library.id.veintechnology.apps.api.open.PublicApi.getFile(PublicApi.java:32) ~[classes!/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_181]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_181]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_181]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_181]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) ~[spring-webmvc-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at id.veintechnology.apps.library.id.veintechnology.apps.security.CorsConfiguration.doFilter(CorsConfiguration.java:38) ~[classes!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at id.veintechnology.apps.library.id.veintechnology.apps.security.AuthenticationFilter.doFilterInternal(AuthenticationFilter.java:31) ~[classes!/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90) ~[spring-boot-actuator-2.0.3.RELEASE.jar!/:2.0.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:209) ~[spring-security-web-5.0.6.RELEASE.jar!/:5.0.6.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) ~[spring-security-web-5.0.6.RELEASE.jar!/:5.0.6.RELEASE]
+	at org.springframework.security.web.debug.DebugFilter.invokeWithWrappedRequest(DebugFilter.java:90) ~[spring-security-web-5.0.6.RELEASE.jar!/:5.0.6.RELEASE]
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:77) ~[spring-security-web-5.0.6.RELEASE.jar!/:5.0.6.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.0.7.RELEASE.jar!/:5.0.7.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) ~[tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:496) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:803) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1468) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_181]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.31.jar!/:8.5.31]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_181]
+
+2018-09-26 00:14:41.715 DEBUG 18475 --- [http-nio-3014-exec-1] o.s.s.w.u.matcher.AntPathRequestMatcher  : Checking match of request : '/error'; against '/api/v1/**'
+2018-09-26 00:14:41.761  INFO 18475 --- [http-nio-3014-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@698c6554
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: 185.201.9.77:3014
+connection: keep-alive
+cache-control: max-age=0
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+accept-encoding: gzip, deflate
+accept-language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: no match
+
+
+************************************************************
+
+
+2018-09-26 00:14:41.774 DEBUG 18475 --- [http-nio-3014-exec-1] o.s.s.w.u.matcher.AntPathRequestMatcher  : Checking match of request : '/error'; against '/api/v1/**'
+2018-09-26 00:14:41.776 DEBUG 18475 --- [http-nio-3014-exec-1] o.s.security.web.FilterChainProxy        : /error has no matching filters
+2018-09-26 00:14:42.228 DEBUG 18475 --- [http-nio-3014-exec-2] o.s.s.w.u.matcher.AntPathRequestMatcher  : Checking match of request : '/favicon.ico'; against '/api/v1/**'
+2018-09-26 00:14:42.231  INFO 18475 --- [http-nio-3014-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/favicon.ico':
+
+org.apache.catalina.connector.RequestFacade@167dfbbb
+
+servletPath:/favicon.ico
+pathInfo:null
+headers: 
+host: 185.201.9.77:3014
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36
+accept: image/webp,image/apng,image/*,*/*;q=0.8
+referer: http://185.201.9.77:3014/storage/image/no_image.jpg
+accept-encoding: gzip, deflate
+accept-language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: no match
+
+
+************************************************************
+
+
+2018-09-26 00:14:42.232 DEBUG 18475 --- [http-nio-3014-exec-2] o.s.s.w.u.matcher.AntPathRequestMatcher  : Checking match of request : '/favicon.ico'; against '/api/v1/**'
+2018-09-26 00:14:42.232 DEBUG 18475 --- [http-nio-3014-exec-2] o.s.security.web.FilterChainProxy        : /favicon.ico has no matching filters

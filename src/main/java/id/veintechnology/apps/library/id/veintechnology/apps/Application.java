@@ -5,6 +5,7 @@ import id.veintechnology.apps.library.id.veintechnology.apps.config.Authenticati
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.context.annotation.Import;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 		ApiConfig.class
 })
 @SpringBootApplication
+@EnableJpaRepositories
 public class Application {
 
 	public static void main(String[] args) {
